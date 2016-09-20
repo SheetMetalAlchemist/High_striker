@@ -31,7 +31,7 @@ int thresh4 = 58;           //THE TIMER VAL TO HIT A LEVEL 4 FIREFX (MAKE THIS L
 int thresh5 = 52;           //THE TIMER VAL TO HIT A LEVEL 5 FIREFX (MAKE THIS LOWER TO MAKE GAME HARDER)
 int settlingBreak = 4000;   //THE TIME FROM AFTER THE FIRE EFFECTS GO OFF UNTIL THE DEVICE IS ARMED AGAIN. THE TIME FOR THE STRIKE PLATE TO SETTLE
 int poofLag = 250;          //THE TIME BETWEEN ACTIVATING THE NEXT POOFER
-int poofOn = 2000;          //THE TIME BETWEEN
+int poofOn = 500;           //THE TIME BETWEEN
 
 void setup() {
   Serial.begin(9600);
@@ -40,6 +40,11 @@ void setup() {
   pinMode(poof3, OUTPUT);
   pinMode(poof4, OUTPUT);
   pinMode(poof5, OUTPUT);
+  digitalWrite(poof1, HIGH);
+  digitalWrite(poof2, HIGH);
+  digitalWrite(poof3, HIGH);
+  digitalWrite(poof4, HIGH);
+  digitalWrite(poof5, HIGH);
 }
 
 void loop() {
@@ -89,6 +94,11 @@ void resetEnc() {
   newLeft = 0;
   oldLeft = 0;
   timer = 0;
+  digitalWrite(poof1, HIGH);
+  digitalWrite(poof2, HIGH);
+  digitalWrite(poof3, HIGH);
+  digitalWrite(poof4, HIGH);
+  digitalWrite(poof5, HIGH);
 }
 
 void flameDet(int rotSpeed) {
@@ -124,51 +134,51 @@ void flameOn(int level) {
   switch (level) {
     case 1:
       Serial.println("Flame Level 1");
-      digitalWrite(poof1, HIGH);
+      digitalWrite(poof1, LOW);
       delay(poofOn);
       flameOff();
       break;
     case 2:
       Serial.println("Flame Level 2");
-      digitalWrite(poof1, HIGH);
+      digitalWrite(poof1, LOW);
       delay(poofLag);
-      digitalWrite(poof2, HIGH);
+      digitalWrite(poof2, LOW);
       delay(poofOn);
       flameOff();
       break;
     case 3:
       Serial.println("Flame Level 3");
-      digitalWrite(poof1, HIGH);
+      digitalWrite(poof1, LOW);
       delay(poofLag);
-      digitalWrite(poof2, HIGH);
+      digitalWrite(poof2, LOW);
       delay(poofLag);
-      digitalWrite(poof3, HIGH);
+      digitalWrite(poof3, LOW);
       delay(poofOn);
       flameOff();
       break;
     case 4:
       Serial.println("Flame Level 4");
-      digitalWrite(poof1, HIGH);
+      digitalWrite(poof1, LOW);
       delay(poofLag);
-      digitalWrite(poof2, HIGH);
+      digitalWrite(poof2, LOW);
       delay(poofLag);
-      digitalWrite(poof3, HIGH);
+      digitalWrite(poof3, LOW);
       delay(poofLag);
-      digitalWrite(poof4, HIGH);
+      digitalWrite(poof4, LOW);
       delay(poofOn);
       flameOff();
       break;
     case 5:
       Serial.println("Flame Level 5");
-      digitalWrite(poof1, HIGH);
+      digitalWrite(poof1, LOW);
       delay(poofLag);
-      digitalWrite(poof2, HIGH);
+      digitalWrite(poof2, LOW);
       delay(poofLag);
-      digitalWrite(poof3, HIGH);
+      digitalWrite(poof3, LOW);
       delay(poofLag);
-      digitalWrite(poof4, HIGH);
+      digitalWrite(poof4, LOW);
       delay(poofLag);
-      digitalWrite(poof5, HIGH);
+      digitalWrite(poof5, LOW);
       delay(poofOn);
       flameOff();
 
@@ -209,18 +219,18 @@ void flameOn(int level) {
 }
 
 void flameOff() {
-  digitalWrite(poof1, LOW);
-  digitalWrite(poof2, LOW);
-  digitalWrite(poof3, LOW);
-  digitalWrite(poof4, LOW);
-  digitalWrite(poof5, LOW);
-}
-
-void poofsOn() {
   digitalWrite(poof1, HIGH);
   digitalWrite(poof2, HIGH);
   digitalWrite(poof3, HIGH);
   digitalWrite(poof4, HIGH);
   digitalWrite(poof5, HIGH);
+}
+
+void poofsOn() {
+  digitalWrite(poof1, LOW);
+  digitalWrite(poof2, LOW);
+  digitalWrite(poof3, LOW);
+  digitalWrite(poof4, LOW);
+  digitalWrite(poof5, LOW);
 }
 
